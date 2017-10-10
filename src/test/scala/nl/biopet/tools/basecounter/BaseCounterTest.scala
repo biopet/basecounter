@@ -45,7 +45,7 @@ class BaseCounterTest extends BiopetTest {
   @Test
   def testBamRecordBasesOverlapBlocks(): Unit = {
     val read = BaseCounterTest.lineParser.parseLine(
-      "r02\t0\tchrQ\t50\t60\t4M2D4M\t*\t0\t0\tTACGTACGTA\tEEFFGGHHII\tRG:Z:001")
+      "r02\t0\tchrQ\t50\t60\t4M2D4M\t*\t0\t0\tTACGTGTA\tEEFFGGII\tRG:Z:001")
     BaseCounter.bamRecordBasesOverlap(read, 40, 70) shouldBe 8
     BaseCounter.bamRecordBasesOverlap(read, 50, 59) shouldBe 8
     BaseCounter.bamRecordBasesOverlap(read, 50, 55) shouldBe 4
