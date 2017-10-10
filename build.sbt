@@ -14,7 +14,7 @@ libraryDependencies += "com.github.biopet" %% "biopet-ngs-utils" % "0.1.0-SNAPSH
 libraryDependencies += "com.github.biopet" %% "biopet-test-utils" % "0.1.0-SNAPSHOT" % Test changing()
 
 //TODO: change mainClass
-mainClass in assembly := Some("nl.biopet.tools.template.ToolTemplate")
+mainClass in assembly := Some("nl.biopet.tools.basecounter.BaseCounter")
 
 useGpg := true
 
