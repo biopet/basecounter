@@ -1,3 +1,5 @@
 # Manual
 
-<Elaborate usage description>
+```bash
+java -jar BaseCounter-version.jar --help
+```

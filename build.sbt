@@ -1,6 +1,6 @@
 organization := "com.github.biopet"
 //TODO: change name
-name := "tool-template"
+name := "BaseCounter"
 
 scalaVersion := "2.11.11"
 
