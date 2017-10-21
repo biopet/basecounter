@@ -8,7 +8,6 @@ resolvers += Resolver.sonatypeRepo("snapshots")
 
 libraryDependencies += "com.github.broadinstitute" % "picard" %  "2.11.0"
 libraryDependencies += "com.github.biopet" %% "biopet-tool-utils" % "0.1-SNAPSHOT" changing()
-libraryDependencies += "com.github.biopet" %% "biopet-config-utils" % "0.1-SNAPSHOT" changing()
 libraryDependencies += "com.github.biopet" %% "biopet-ngs-utils" % "0.1-SNAPSHOT" changing()
 
 libraryDependencies += "com.github.biopet" %% "biopet-test-utils" % "0.1-SNAPSHOT" % Test changing()
