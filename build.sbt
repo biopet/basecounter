@@ -1,6 +1,5 @@
 organization := "com.github.biopet"
-//TODO: change name
-name := "tool-template"
+name := "basecounter"
 
 scalaVersion := "2.11.11"
 
@@ -12,7 +11,6 @@ libraryDependencies += "com.github.biopet" %% "ngs-utils" % "0.1-SNAPSHOT" chang
 
 libraryDependencies += "com.github.biopet" %% "test-utils" % "0.1-SNAPSHOT" % Test changing()
 
-//TODO: change mainClass
 mainClass in assembly := Some("nl.biopet.tools.basecounter.BaseCounter")
 
 useGpg := true
@@ -27,6 +25,10 @@ publishTo := {
 
 import ReleaseTransformations._
 releaseProcess := Seq[ReleaseStep](
+  releaseStepCommand("git fetch"),
+  releaseStepCommand("git checkout master"),
+  releaseStepCommand("git pull"),
+  releaseStepCommand("git merge origin/develop"),
   checkSnapshotDependencies,
   inquireVersions,
   runClean,
@@ -35,8 +37,11 @@ releaseProcess := Seq[ReleaseStep](
   commitReleaseVersion,
   tagRelease,
   releaseStepCommand("publishSigned"),
+  releaseStepCommand("sonatypeReleaseAll"),
+  pushChanges,
+  releaseStepCommand("git checkout develop"),
+  releaseStepCommand("git merge master"),
   setNextVersion,
   commitNextVersion,
-  releaseStepCommand("sonatypeReleaseAll"),
   pushChanges
 )
