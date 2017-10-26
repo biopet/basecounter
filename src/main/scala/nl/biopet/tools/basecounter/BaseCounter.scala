@@ -3,7 +3,7 @@ package nl.biopet.tools.basecounter
 import java.io.{File, PrintWriter}
 
 import htsjdk.samtools.{SAMRecord, SamReaderFactory}
-import nl.biopet.utils.config.Conversions
+import nl.biopet.utils.conversions
 import nl.biopet.utils.ngs.intervals.{BedRecord, BedRecordList}
 import nl.biopet.utils.tool.ToolCommand
 import picard.annotation.{Gene, GeneAnnotationReader}
@@ -66,7 +66,7 @@ object BaseCounter extends ToolCommand {
 
     val summaryWriter = new PrintWriter(
       new File(cmdArgs.outputDir, s"${cmdArgs.prefix}.summary.json"))
-    summaryWriter.println(Conversions.mapToJson(summary))
+    summaryWriter.println(conversions.mapToJson(summary))
     summaryWriter.close()
   }
 

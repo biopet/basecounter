@@ -1,19 +1,17 @@
 organization := "com.github.biopet"
-//TODO: change name
-name := "BaseCounter"
+
+name := "basecounter"
 
 scalaVersion := "2.11.11"
 
 resolvers += Resolver.sonatypeRepo("snapshots")
 
 libraryDependencies += "com.github.broadinstitute" % "picard" %  "2.11.0"
-libraryDependencies += "com.github.biopet" %% "biopet-tool-utils" % "0.1-SNAPSHOT" changing()
-libraryDependencies += "com.github.biopet" %% "biopet-config-utils" % "0.1-SNAPSHOT" changing()
-libraryDependencies += "com.github.biopet" %% "biopet-ngs-utils" % "0.1-SNAPSHOT" changing()
+libraryDependencies += "com.github.biopet" %% "tool-utils" % "0.1"
+libraryDependencies += "com.github.biopet" %% "ngs-utils" % "0.1"
 
-libraryDependencies += "com.github.biopet" %% "biopet-test-utils" % "0.1-SNAPSHOT" % Test changing()
+libraryDependencies += "com.github.biopet" %% "test-utils" % "0.1" % Test
 
-//TODO: change mainClass
 mainClass in assembly := Some("nl.biopet.tools.basecounter.BaseCounter")
 
 useGpg := true
@@ -28,6 +26,10 @@ publishTo := {
 
 import ReleaseTransformations._
 releaseProcess := Seq[ReleaseStep](
+  releaseStepCommand("git fetch"),
+  releaseStepCommand("git checkout master"),
+  releaseStepCommand("git pull"),
+  releaseStepCommand("git merge origin/develop"),
   checkSnapshotDependencies,
   inquireVersions,
   runClean,
@@ -36,8 +38,11 @@ releaseProcess := Seq[ReleaseStep](
   commitReleaseVersion,
   tagRelease,
   releaseStepCommand("publishSigned"),
+  releaseStepCommand("sonatypeReleaseAll"),
+  pushChanges,
+  releaseStepCommand("git checkout develop"),
+  releaseStepCommand("git merge master"),
   setNextVersion,
   commitNextVersion,
-  releaseStepCommand("sonatypeReleaseAll"),
   pushChanges
 )
