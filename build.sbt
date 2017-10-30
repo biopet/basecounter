@@ -1,4 +1,5 @@
 organization := "com.github.biopet"
+
 name := "basecounter"
 
 scalaVersion := "2.11.11"
