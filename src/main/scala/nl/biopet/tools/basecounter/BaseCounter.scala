@@ -11,7 +11,7 @@ import picard.annotation.{Gene, GeneAnnotationReader}
 import scala.collection.JavaConversions._
 import scala.collection.immutable
 
-object BaseCounter extends ToolCommand {
+object BaseCounter extends ToolCommand[Args] {
   def main(args: Array[String]): Unit = {
     val parser = new ArgsParser(toolName)
     val cmdArgs =
