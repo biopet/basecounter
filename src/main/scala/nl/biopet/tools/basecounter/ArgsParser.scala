@@ -16,5 +16,5 @@ class ArgsParser(cmdName: String) extends AbstractOptParser[Args](cmdName) {
   } text "Bam file. Mandatory"
   opt[String]('p', "prefix") valueName "<prefix>" action { (x, c) =>
     c.copy(prefix = x)
-  }
+  } text "The prefix for the output files"
 }
