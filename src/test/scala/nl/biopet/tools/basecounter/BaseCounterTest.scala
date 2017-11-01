@@ -13,6 +13,7 @@ import picard.annotation.Gene
 import scala.collection.JavaConversions._
 
 class BaseCounterTest extends ToolTest[Args] {
+  def toolCommand: BaseCounter.type = BaseCounter
 
   import BaseCounterTest._
 
