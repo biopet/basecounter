@@ -5,14 +5,15 @@ import java.nio.file.Paths
 
 import com.google.common.io.Files
 import htsjdk.samtools.{SAMFileHeader, SAMLineParser, SAMReadGroupRecord, SAMSequenceRecord}
-import nl.biopet.test.BiopetTest
+import nl.biopet.utils.test.tools.ToolTest
 import nl.biopet.tools.basecounter.BaseCounter.{Counts, GeneCount}
 import org.testng.annotations.Test
 import picard.annotation.Gene
 
 import scala.collection.JavaConversions._
 
-class BaseCounterTest extends BiopetTest {
+class BaseCounterTest extends ToolTest[Args] {
+  def toolCommand: BaseCounter.type = BaseCounter
 
   import BaseCounterTest._
 
