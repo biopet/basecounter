@@ -638,4 +638,31 @@ object BaseCounter extends ToolCommand[Args] {
       bamRecordBasesOverlap(samRecord, start, end, counts, sense)
     }
   }
+
+  def descriptionText: String =
+    s"""
+       |$toolName counts the bases from genes and transcripts and
+       |outputs information on the counts in exonic and intronic
+       |regions as well as information on the counts on the sense
+       |and antisense strands.
+     """.stripMargin
+
+  def manualText: String =
+    s"""
+       |$toolName takes a refflat file and a bam file.
+       |Also an output directory needs to be specified. Optionally a prefix
+       |for the output files can be specified.
+     """.stripMargin
+
+  def exampleText: String =
+    s""" To count the bases in `bamfile.bam` usin the regions specified by `refflatfile.gtf`:
+       |${example("-r",
+                  "refflatfile.gtf",
+                  "-b",
+                  "bamfile.bam",
+                  "-o",
+                  "output_dir",
+                  "-p",
+                  "prefix")}
+     """.stripMargin
 }

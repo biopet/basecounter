@@ -11,8 +11,7 @@ biopetIsTool := true
 mainClass in assembly := Some("nl.biopet.tools.basecounter.BaseCounter")
 
 developers := List(
-  Developer(id="ffinfo", name="Peter van 't Hof", email="pjrvanthof@gmail.com", url=url("https://github.com/ffinfo")),
-  Developer(id="rhpvorderman", name="Ruben Vorderman", email="r.h.p.vorderman@lumc.nl", url=url("https://github.com/rhpvorderman"))
+  Developer(id="ffinfo", name="Peter van 't Hof", email="pjrvanthof@gmail.com", url=url("https://github.com/ffinfo"))
 )
 
 scalaVersion := "2.11.11"
