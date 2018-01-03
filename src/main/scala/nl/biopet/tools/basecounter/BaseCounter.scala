@@ -1,3 +1,24 @@
+/*
+ * Copyright (c) 2014 Sequencing Analysis Support Core - Leiden University Medical Center
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in
+ * the Software without restriction, including without limitation the rights to
+ * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * the Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+ * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+ * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package nl.biopet.tools.basecounter
 
 import java.io.{File, PrintWriter}
@@ -13,7 +34,7 @@ import scala.collection.immutable
 
 object BaseCounter extends ToolCommand[Args] {
   def emptyArgs: Args = Args()
-  def argsParser = new ArgsParser(toolName)
+  def argsParser = new ArgsParser(this)
   def main(args: Array[String]): Unit = {
     val cmdArgs = cmdArrayToArgs(args)
 
@@ -638,4 +659,31 @@ object BaseCounter extends ToolCommand[Args] {
       bamRecordBasesOverlap(samRecord, start, end, counts, sense)
     }
   }
+
+  def descriptionText: String =
+    s"""
+       |$toolName counts the bases from genes and transcripts and
+       |outputs information on the counts in exonic and intronic
+       |regions as well as information on the counts on the sense
+       |and antisense strands.
+     """.stripMargin
+
+  def manualText: String =
+    s"""
+       |$toolName takes a refflat file and a bam file.
+       |Also an output directory needs to be specified. Optionally a prefix
+       |for the output files can be specified.
+     """.stripMargin
+
+  def exampleText: String =
+    s""" To count the bases in `bamfile.bam` usin the regions specified by `refflatfile.gtf`:
+       |${example("-r",
+                  "refflatfile.gtf",
+                  "-b",
+                  "bamfile.bam",
+                  "-o",
+                  "output_dir",
+                  "-p",
+                  "prefix")}
+     """.stripMargin
 }
