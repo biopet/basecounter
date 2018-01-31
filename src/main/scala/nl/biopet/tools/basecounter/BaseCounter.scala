@@ -683,11 +683,11 @@ object BaseCounter extends ToolCommand[Args] {
        |is also generated. These contain the counts for only the exonic
        |regions of a gene/transcript and only the intronic counts for a
        |gene/transcript.
-       |For the exon and intron output a "merge" output is also generated
+       |For the exon and intron output a "merge" output is also generated.
        |In these files the counts are given, in which overlapping exons
        |within a gene are considered one exon.
-       |Meta-exons are the exons split into separate regions based on the
-       |overlap of exons between transcripts.
+       |Meta-exons are the exons split into separate features based on the
+       |overlap of exons between transcripts and genes.
      """.stripMargin
 
   def exampleText: String =
