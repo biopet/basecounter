@@ -99,11 +99,25 @@
         <p>BaseCounter takes a refflat file and a bam file.
         Also an output directory needs to be specified. Optionally a prefix
         for the output files can be specified.</p>
+        <p>This tool produces a number of tab-seperated output files in the
+        specified output directory. Each of these files contains the base
+        counts for a different type of feature (exon, intron, gene,
+        transcript or meta-exon) or a different strandedness (normal, sense
+        or anti-sense).
+        For the gene and transcript output an &quot;exonic&quot; and &quot;intronic&quot; output
+        is also generated. These contain the counts for only the exonic
+        regions of a gene/transcript and only the intronic counts for a
+        gene/transcript.
+        For the exon and intron output a &quot;merge&quot; output is also generated.
+        In these files the counts are given, in which overlapping exons
+        within a gene are considered one exon.
+        Meta-exons are the exons split into separate features based on the
+        overlap of exons between transcripts and genes.</p>
         
         <h2 id="example" class="section">Example</h2>
-        <p> To count the bases in <code>bamfile.bam</code> usin the regions specified by <code>refflatfile.gtf</code>:</p>
+        <p> To count the bases in <code>bamfile.bam</code> usin the regions specified by <code>refflatfile.refflat</code>:</p>
         <pre><code>java -jar &lt;BaseCounter_jar&gt; \
--r refflatfile.gtf \
+-r refflatfile.refflat \
 -b bamfile.bam \
 -o output_dir \
 -p prefix</code></pre>
