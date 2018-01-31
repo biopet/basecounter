@@ -679,13 +679,16 @@ object BaseCounter extends ToolCommand[Args] {
        |counts for a different type of feature (exon, intron, gene,
        |transcript or meta-exon) or a different strandedness (normal, sense
        |or anti-sense).
+       |
        |For the gene and transcript output an "exonic" and "intronic" output
        |is also generated. These contain the counts for only the exonic
        |regions of a gene/transcript and only the intronic counts for a
        |gene/transcript.
+       |
        |For the exon and intron output a "merge" output is also generated.
        |In these files the counts are given, in which overlapping exons
        |within a gene are considered one exon.
+       |
        |Meta-exons are the exons split into separate features based on the
        |overlap of exons between transcripts and genes.
      """.stripMargin
