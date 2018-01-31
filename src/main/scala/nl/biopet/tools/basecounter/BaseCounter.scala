@@ -366,8 +366,8 @@ object BaseCounter extends ToolCommand[Args] {
   }
 
   /**
-    * This function will print all counts that does *not* exist on exonic regions,
-    * each base withing the gene is only represented once but all regions are separated
+    * This function will print all counts that do *not* exist on exonic regions,
+    * each base within the gene is only represented once but all regions are separated
     */
   def writeMergeIntronCount(genes: List[GeneCount],
                             outputDir: File,
@@ -673,12 +673,27 @@ object BaseCounter extends ToolCommand[Args] {
        |$toolName takes a refflat file and a bam file.
        |Also an output directory needs to be specified. Optionally a prefix
        |for the output files can be specified.
+       |
+       |This tool produces a number of tab-seperated output files in the
+       |specified output directory. Each of these files contains the base
+       |counts for a different type of feature (exon, intron, gene,
+       |transcript or meta-exon) or a different strandedness (normal, sense
+       |or anti-sense).
+       |For the gene and transcript output an "exonic" and "intronic" output
+       |is also generated. These contain the counts for only the exonic
+       |regions of a gene/transcript and only the intronic counts for a
+       |gene/transcript.
+       |For the exon and intron output a "merge" output is also generated.
+       |In these files the counts are given, in which overlapping exons
+       |within a gene are considered one exon.
+       |Meta-exons are the exons split into separate features based on the
+       |overlap of exons between transcripts and genes.
      """.stripMargin
 
   def exampleText: String =
-    s""" To count the bases in `bamfile.bam` usin the regions specified by `refflatfile.gtf`:
+    s""" To count the bases in `bamfile.bam` usin the regions specified by `refflatfile.refflat`:
        |${example("-r",
-                  "refflatfile.gtf",
+                  "refflatfile.refflat",
                   "-b",
                   "bamfile.bam",
                   "-o",
