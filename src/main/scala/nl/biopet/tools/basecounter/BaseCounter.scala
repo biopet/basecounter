@@ -133,8 +133,7 @@ object BaseCounter extends ToolCommand[Args] {
     val transcriptIntronicSenseWriter = new PrintWriter(
       new File(outputDir, s"$prefix.base.transcript.intronic.sense.counts"))
     val transcriptIntronicAntiSenseWriter = new PrintWriter(
-      new File(outputDir,
-               s"$prefix.base.transcript.intronic.antisense.counts"))
+      new File(outputDir, s"$prefix.base.transcript.intronic.antisense.counts"))
 
     genes.flatMap(_.transcripts).sortBy(_.transcript.name).foreach {
       transcriptCount =>
@@ -503,8 +502,7 @@ object BaseCounter extends ToolCommand[Args] {
         (regions.flatMap(_._2.allRecords.map(_.end)) ++ regions.flatMap(
           _._2.allRecords.map(_.start))).distinct.sorted
 
-      def mergeRegions(newBegin: Int,
-                       output: List[(String, RegionCount)] = Nil)
+      def mergeRegions(newBegin: Int, output: List[(String, RegionCount)] = Nil)
         : List[(String, RegionCount)] = {
         val newEnds = posibleEnds.filter(_ > newBegin)
         if (newBegin > end || newEnds.isEmpty) output
