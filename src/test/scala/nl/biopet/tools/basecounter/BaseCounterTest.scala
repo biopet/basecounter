@@ -1,10 +1,36 @@
+/*
+ * Copyright (c) 2014 Biopet
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in
+ * the Software without restriction, including without limitation the rights to
+ * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * the Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+ * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+ * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package nl.biopet.tools.basecounter
 
 import java.io.File
 import java.nio.file.Paths
 
 import com.google.common.io.Files
-import htsjdk.samtools.{SAMFileHeader, SAMLineParser, SAMReadGroupRecord, SAMSequenceRecord}
+import htsjdk.samtools.{
+  SAMFileHeader,
+  SAMLineParser,
+  SAMReadGroupRecord,
+  SAMSequenceRecord
+}
 import nl.biopet.utils.test.tools.ToolTest
 import nl.biopet.tools.basecounter.BaseCounter.{Counts, GeneCount}
 import org.testng.annotations.Test
@@ -157,30 +183,57 @@ class BaseCounterTest extends ToolTest[Args] {
 
   @Test
   def testGroupGenesOnOverlap(): Unit = {
-    assert(BaseCounter.groupGenesOnOverlap(geneC :: geneD :: Nil)("chrQ").contains(List(geneC)))
-    assert(BaseCounter.groupGenesOnOverlap(geneC :: geneD :: Nil)("chrQ").contains(List(geneD)))
-    assert(!BaseCounter.groupGenesOnOverlap(geneC :: geneD :: Nil)("chrQ").contains(List(geneD, geneC)))
+    assert(
+      BaseCounter
+        .groupGenesOnOverlap(geneC :: geneD :: Nil)("chrQ")
+        .contains(List(geneC)))
+    assert(
+      BaseCounter
+        .groupGenesOnOverlap(geneC :: geneD :: Nil)("chrQ")
+        .contains(List(geneD)))
+    assert(
+      !BaseCounter
+        .groupGenesOnOverlap(geneC :: geneD :: Nil)("chrQ")
+        .contains(List(geneD, geneC)))
 
-    assert(!BaseCounter.groupGenesOnOverlap(geneC :: geneA :: Nil)("chrQ").contains(List(geneA)))
-    assert(!BaseCounter.groupGenesOnOverlap(geneC :: geneA :: Nil)("chrQ").contains(List(geneC)))
-    assert(BaseCounter.groupGenesOnOverlap(geneC :: geneA :: Nil)("chrQ").contains(List(geneA, geneC)))
+    assert(
+      !BaseCounter
+        .groupGenesOnOverlap(geneC :: geneA :: Nil)("chrQ")
+        .contains(List(geneA)))
+    assert(
+      !BaseCounter
+        .groupGenesOnOverlap(geneC :: geneA :: Nil)("chrQ")
+        .contains(List(geneC)))
+    assert(
+      BaseCounter
+        .groupGenesOnOverlap(geneC :: geneA :: Nil)("chrQ")
+        .contains(List(geneA, geneC)))
   }
 
   @Test
   def testCreateMetaExonCounts(): Unit = {
     val ab = BaseCounter.createMetaExonCounts(geneA :: geneB :: Nil)
     ab.size shouldBe 9
-    assert(ab.exists(x => x._1 == "geneA" && x._2.start == 101 && x._2.end == 120))
-    assert(ab.exists(x => x._1 == "geneA" && x._2.start == 131 && x._2.end == 140))
+    assert(
+      ab.exists(x => x._1 == "geneA" && x._2.start == 101 && x._2.end == 120))
+    assert(
+      ab.exists(x => x._1 == "geneA" && x._2.start == 131 && x._2.end == 140))
 
-    assert(ab.exists(x => x._1 == "geneA,geneB" && x._2.start == 151 && x._2.end == 160))
-    assert(ab.exists(x => x._1 == "geneB" && x._2.start == 161 && x._2.end == 170))
-    assert(ab.exists(x => x._1 == "geneA" && x._2.start == 171 && x._2.end == 180))
-    assert(ab.exists(x => x._1 == "geneA,geneB" && x._2.start == 181 && x._2.end == 190))
-    assert(ab.exists(x => x._1 == "geneA" && x._2.start == 191 && x._2.end == 200))
+    assert(ab.exists(x =>
+      x._1 == "geneA,geneB" && x._2.start == 151 && x._2.end == 160))
+    assert(
+      ab.exists(x => x._1 == "geneB" && x._2.start == 161 && x._2.end == 170))
+    assert(
+      ab.exists(x => x._1 == "geneA" && x._2.start == 171 && x._2.end == 180))
+    assert(ab.exists(x =>
+      x._1 == "geneA,geneB" && x._2.start == 181 && x._2.end == 190))
+    assert(
+      ab.exists(x => x._1 == "geneA" && x._2.start == 191 && x._2.end == 200))
 
-    assert(ab.exists(x => x._1 == "geneB" && x._2.start == 201 && x._2.end == 210))
-    assert(ab.exists(x => x._1 == "geneB" && x._2.start == 221 && x._2.end == 250))
+    assert(
+      ab.exists(x => x._1 == "geneB" && x._2.start == 201 && x._2.end == 210))
+    assert(
+      ab.exists(x => x._1 == "geneB" && x._2.start == 221 && x._2.end == 250))
   }
 
   @Test
@@ -192,13 +245,13 @@ class BaseCounterTest extends ToolTest[Args] {
     val refflat = new File(resourcePath("/chrQ.refflat"))
     BaseCounter.main(
       Array("-o",
-        outputDir.getAbsolutePath,
-        "-p",
-        prefix,
-        "-b",
-        bamFile.getAbsolutePath,
-        "-r",
-        refflat.getAbsolutePath))
+            outputDir.getAbsolutePath,
+            "-p",
+            prefix,
+            "-b",
+            bamFile.getAbsolutePath,
+            "-r",
+            refflat.getAbsolutePath))
     outputDir.list().length shouldBe 35
   }
 }
